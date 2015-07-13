@@ -65,4 +65,8 @@ migrations/
 # database
 *.sqlite3
 
+#excel files
+*.xls
+*.xlsx
+
 

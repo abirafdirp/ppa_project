@@ -13,10 +13,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-import moneyed
-from moneyed.localization import _FORMATTER
-from decimal import ROUND_HALF_EVEN
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -42,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'transaction',
+    'import_export',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,25 +102,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# django-money configuration add new custom currency
-BOB = moneyed.add_currency(
-    code='Rp.',
-    numeric='069',
-    name='Indonesia Rupiah',
-    countries=('INDONESIA', )
-)
-
-# Currency Formatter will output 2.000,00 Bs.
-_FORMATTER.add_sign_definition(
-    'default',
-    BOB,
-    prefix=u'Rp. '
-)
-
-_FORMATTER.add_formatting_definition(
-    'es_BO',
-    group_size=3, group_separator=".", decimal_point=",",
-    positive_sign="",  trailing_positive_sign="",
-    negative_sign="-", trailing_negative_sign="",
-    rounding_method=ROUND_HALF_EVEN)

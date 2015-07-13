@@ -1,6 +1,4 @@
-import moneyed
 from django.contrib.auth.models import User
-from djmoney.models.fields import MoneyField
 from django.db import models
 
 class TimeStampedModel(models.Model):
@@ -34,8 +32,6 @@ class Transaction(TimeStampedModel):
     account_debet = models.ForeignKey(Account, related_name='trasaksi_debet')
     account_kredit = models.ForeignKey(Account,
                                        related_name='transaksi_kredit')
-    jumlah = MoneyField(max_digits=13, decimal_places=0,
-                        default_currency='IDR')
-
+    jumlah = models.IntegerField()
     def __str__(self):
         return self.name
