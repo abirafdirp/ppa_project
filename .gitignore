@@ -60,6 +60,9 @@ docs/_build/
 target/
 
 # migrations
+migrations/
 
+# database
+*.sqlite3
 
 

@@ -11,8 +11,8 @@ class TimeStampedModel(models.Model):
     fields.
     """
 
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now_add=True)
+    created = models.DateField(auto_now_add=True)
+    modified = models.DateField(auto_now_add=True)
 
     class Meta:
         abstract = True
@@ -26,8 +26,11 @@ class Account(TimeStampedModel):
         return self.name
 
 class Transaction(TimeStampedModel):
-    owner = models.ForeignKey(User, related_name='transactions')
+    owner = models.ForeignKey(User, related_name='transactions',
+                              help_text='owner is logged in user and will be'+
+                              ' automatically created')
     name = models.CharField(max_length=100, verbose_name='nama')
+    keterangan = models.CharField(max_length=100, blank=True)
     account_debet = models.ForeignKey(Account, related_name='trasaksi_debet')
     account_kredit = models.ForeignKey(Account,
                                        related_name='transaksi_kredit')

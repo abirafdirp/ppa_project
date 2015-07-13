@@ -30,7 +30,53 @@ def populate():
     c = add_account(owner=owner, name='kas', code='1.1.3')
     d = add_account(owner=owner, name='pinjaman', code='1.1.4')
     add_transaction(owner=owner, name='gaji', account_debet=a,
-                    account_kredit=b, jumlah=1000000)
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+    add_transaction(owner=owner, name='gajiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', account_debet=a,
+                    account_kredit=b, jumlah=1000000, keterangan='asfasgfasgasgasg')
+
+
+
+
 
 
 
@@ -48,7 +94,8 @@ def add_account(owner, name, code):
         print 'code harus unik'
         return
 
-def add_transaction(name, owner, account_debet, account_kredit, jumlah):
+def add_transaction(name, owner, account_debet, account_kredit, jumlah,
+                    keterangan):
     try:
         account_debet = Account.objects.get(code=account_debet.code)
     except:
@@ -63,10 +110,11 @@ def add_transaction(name, owner, account_debet, account_kredit, jumlah):
               %(account_kredit)
         return
 
-    transaction, created = Transaction.objects.get_or_create\
+    transaction = Transaction.objects.create\
         (owner=owner, name=name, account_debet=account_debet,
-         account_kredit=account_kredit, jumlah=jumlah)
-    display(name+' '+type, 'transaction')
+         account_kredit=account_kredit, jumlah=jumlah, keterangan=keterangan)
+    display(name, 'transaction')
+    transaction.save()
     return transaction
 
 
