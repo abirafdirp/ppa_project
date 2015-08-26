@@ -69,4 +69,7 @@ migrations/
 *.xls
 *.xlsx
 
+# pycharm
+.idea/
+
 
