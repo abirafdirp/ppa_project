@@ -1,10 +1,20 @@
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportMixin
+from import_export import fields
 from .models import Account
 from .models import Transaction
 
+
 class ExportData(resources.ModelResource):
+
+    owner__username = fields.Field(column_name='Pembuat')
+
+    name = fields.Field(column_name='Transaksi')
+    account_debet = fields.Field(column_name='Account Debet')
+    account_kredit = fields.Field(column_name='Account Kredit')
+    account_debet__code = fields.Field(column_name='Kode Account Debet')
+    account_kredit__code = fields.Field(column_name='Kode Account Kredit')
 
     class Meta:
         model = Transaction
@@ -42,13 +52,10 @@ class TransactionAdmin(ImportExportMixin, admin.ModelAdmin):
                 b += 1
         return ''.join(str(e) for e in jumlah)
 
-
-
-
-
     def save_model(self, request, obj, form, change):
         obj.owner = request.user
         obj.save()
+
 
 class AccountAdmin(admin.ModelAdmin):
     list_display = ('name', 'code')
