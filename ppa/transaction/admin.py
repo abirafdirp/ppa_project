@@ -8,21 +8,24 @@ from .models import Transaction
 
 class ExportData(resources.ModelResource):
 
-    owner__username = fields.Field(column_name='Pembuat')
+    owner__username = fields.Field(attribute='owner__username',column_name='Pembuat')
 
-    name = fields.Field(column_name='Transaksi')
-    account_debet = fields.Field(column_name='Account Debet')
-    account_kredit = fields.Field(column_name='Account Kredit')
-    account_debet__code = fields.Field(column_name='Kode Account Debet')
-    account_kredit__code = fields.Field(column_name='Kode Account Kredit')
+
+    account_kredit__code = fields.Field(attribute='account_kredit__code',
+                                        column_name='kode account kredit')
+    account_kredit = fields.Field(attribute='account_kredit',
+                                  column_name='account kredit')
+    account_debet__code = fields.Field(attribute='account_debet__code',
+                                       column_name='kode account debet')
+    account_debet = fields.Field(attribute='account_debet',
+                                 column_name='account debet')
+    name = fields.Field(attribute='name',column_name='transaksi')
 
     class Meta:
         model = Transaction
-        fields = ('created', 'name', 'keterangan', 'account_debet__code',
-        'account_debet__name', 'account_kredit__code', 'account_kredit__name',
-        'jumlah', 'owner__username')
+        exclude = ('owner', 'id')
         export_order = ('created', 'name', 'keterangan', 'account_debet__code',
-        'account_debet__name', 'account_kredit__code', 'account_kredit__name',
+        'account_debet', 'account_kredit__code', 'account_kredit',
         'jumlah', 'owner__username')
 
 
