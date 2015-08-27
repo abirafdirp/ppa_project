@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+
 class TimeStampedModel(models.Model):
 
     """
@@ -15,6 +16,7 @@ class TimeStampedModel(models.Model):
     class Meta:
         abstract = True
 
+
 class Account(TimeStampedModel):
     owner = models.ForeignKey(User, related_name='accounts')
     name = models.CharField(max_length=50, verbose_name='nama')
@@ -22,6 +24,7 @@ class Account(TimeStampedModel):
 
     def __str__(self):
         return self.name
+
 
 class Transaction(TimeStampedModel):
     owner = models.ForeignKey(User, related_name='transactions',
@@ -33,5 +36,6 @@ class Transaction(TimeStampedModel):
     account_kredit = models.ForeignKey(Account,
                                        related_name='transaksi_kredit')
     jumlah = models.IntegerField()
+
     def __str__(self):
         return self.name

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load i18n %}
+{% load l10n %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Putra Putri Mandiri</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+</body>
+  <div class="container-fluid">
+    <div class="col-xs-10 col-xs-offset-1">
+
+      <h2 class="text-center">Laporan Harian Putra Putri Mandiri</h2>
+      {% localize on %}
+        {% now "d F Y" %}
+      {% endlocalize %}
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th class="text-center">Nama</th>
+              <th class="text-center">Account Debet</th>
+              <th class="text-center">Kode Account Debet</th>
+              <th class="text-center">Account Kredit</th>
+              <th class="text-center">Kode Account Debet</th>
+              <th class="text-center">Keterangan</th>
+              <th class="text-center">Jumlah</th>
+              <th class="text-center">Pembuat</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for transaction in transactions %}
+            <tr class="text-center">
+              <td>{{ transaction.name }}</td>
+              <td>{{ transaction.account_debet }}</td>
+              <td>{{ transaction.account_debet.code }}</td>
+              <td>{{ transaction.account_kredit }}</td>
+              <td>{{ transaction.account_kredit.code }}</td>
+              <td>{{ transaction.keterangan }}</td>
+              <td>{{ transaction.jumlah }}</td>
+              <td>{{ transaction.owner.username }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+  </div>
+</body>
+</body>
+</html>
