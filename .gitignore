@@ -62,9 +62,6 @@ target/
 # migrations
 migrations/
 
-# database
-*.sqlite3
-
 #excel files
 *.xls
 *.xlsx

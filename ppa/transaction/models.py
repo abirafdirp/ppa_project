@@ -17,10 +17,33 @@ class TimeStampedModel(models.Model):
         abstract = True
 
 
+class AccountCategory(TimeStampedModel):
+    name = models.CharField(max_length=50, verbose_name='nama')
+    CHOICES = (
+        ('+', '+'),
+        ('-', '-'),
+        (' ', ' '),
+    )
+    debet = models.CharField(max_length=5, choices=CHOICES)
+    kredit = models.CharField(max_length=5, choices=CHOICES)
+
+    class Meta:
+        verbose_name_plural = 'Account Categories'
+
+    def __str__(self):
+        return self.name
+
+
 class Account(TimeStampedModel):
     owner = models.ForeignKey(User, related_name='accounts')
     name = models.CharField(max_length=50, verbose_name='nama')
+    account_category = models.ForeignKey(AccountCategory, blank=True,
+                                         null=True)
     code = models.CharField(max_length=10, verbose_name='kode', unique=True)
+    jumlah = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -36,6 +59,19 @@ class Transaction(TimeStampedModel):
     account_kredit = models.ForeignKey(Account,
                                        related_name='transaksi_kredit')
     jumlah = models.IntegerField()
+
+    def save(self, *args, **kwargs):
+        if self.account_debet.account_category.debet == '+':
+            self.account_debet.jumlah += self.jumlah
+        elif self.account_debet.account_category.debet == '-':
+            self.account_debet.jumlah -= self.jumlah
+
+        if self.account_kredit.account_category.debet == '+':
+            self.account_kredit.jumlah += self.jumlah
+        elif self.account_kredit.account_category.debet == '-':
+            self.account_kredit.jumlah -= self.jumlah
+
+        super(Transaction, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name

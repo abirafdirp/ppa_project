@@ -4,6 +4,7 @@ from import_export.admin import ImportExportMixin
 from import_export import fields
 from .models import Account
 from .models import Transaction
+from .models import AccountCategory
 
 
 class ExportData(resources.ModelResource):
@@ -61,9 +62,14 @@ class TransactionAdmin(ImportExportMixin, admin.ModelAdmin):
 
 
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ('name', 'code')
+    list_display = ('name', 'account_category', 'code', 'jumlah')
+    readonly_fields = ('jumlah',)
 
+
+class AccountCategoryAdmin(admin.ModelAdmin):
+    pass
 
 admin.site.register(Transaction, TransactionAdmin)
 admin.site.register(Account, AccountAdmin)
+admin.site.register(AccountCategory, AccountCategoryAdmin)
 
