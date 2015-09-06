@@ -46,15 +46,8 @@ class TransactionAdmin(ImportExportMixin, admin.ModelAdmin):
 
     def jumlah_(self, obj):
         jumlah = obj.jumlah
-        jumlah = map(int, str(jumlah))
-        jumlah_len = len(jumlah)
-        b = 0
-        for a in range(-1, jumlah_len * -1, -1):
-            if a % 3 == 0:
-                jumlah.insert(a-b, '.')
-                jumlah_len += 1
-                b += 1
-        return ''.join(str(e) for e in jumlah)
+        jumlah = "{:,}".format(jumlah)
+        return jumlah
 
     def save_model(self, request, obj, form, change):
         obj.owner = request.user
@@ -62,9 +55,13 @@ class TransactionAdmin(ImportExportMixin, admin.ModelAdmin):
 
 
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ('name', 'account_category', 'code', 'jumlah')
+    list_display = ('name', 'account_category', 'code', 'jumlah_')
     readonly_fields = ('jumlah',)
 
+    def jumlah_(self, obj):
+        jumlah = obj.jumlah
+        jumlah = "{:,}".format(jumlah)
+        return jumlah
 
 class AccountCategoryAdmin(admin.ModelAdmin):
     pass

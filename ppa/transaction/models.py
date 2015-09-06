@@ -61,17 +61,23 @@ class Transaction(TimeStampedModel):
     jumlah = models.IntegerField()
 
     def save(self, *args, **kwargs):
+        super(Transaction, self).save(*args, **kwargs)
+
         if self.account_debet.account_category.debet == '+':
             self.account_debet.jumlah += self.jumlah
+            self.account_debet.save()
+
         elif self.account_debet.account_category.debet == '-':
             self.account_debet.jumlah -= self.jumlah
+            self.account_debet.save()
 
         if self.account_kredit.account_category.debet == '+':
             self.account_kredit.jumlah += self.jumlah
+            self.account_kredit.save()
+
         elif self.account_kredit.account_category.debet == '-':
             self.account_kredit.jumlah -= self.jumlah
-
-        super(Transaction, self).save(*args, **kwargs)
+            self.account_kredit.save()
 
     def __str__(self):
         return self.name
