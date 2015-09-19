@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-
+from django.utils import timezone
 
 class TimeStampedModel(models.Model):
 
@@ -10,8 +10,8 @@ class TimeStampedModel(models.Model):
     fields.
     """
 
-    created = models.DateField(auto_now_add=True)
-    modified = models.DateField(auto_now_add=True)
+    created = models.DateField(default=timezone.now())
+    modified = models.DateField(default=timezone.now())
 
     class Meta:
         abstract = True
@@ -71,11 +71,11 @@ class Transaction(TimeStampedModel):
             self.account_debet.jumlah -= self.jumlah
             self.account_debet.save()
 
-        if self.account_kredit.account_category.debet == '+':
+        if self.account_kredit.account_category.kredit == '+':
             self.account_kredit.jumlah += self.jumlah
             self.account_kredit.save()
 
-        elif self.account_kredit.account_category.debet == '-':
+        elif self.account_kredit.account_category.kredit == '-':
             self.account_kredit.jumlah -= self.jumlah
             self.account_kredit.save()
 

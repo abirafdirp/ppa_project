@@ -19,8 +19,24 @@ def display_not_today(request, day, month, year):
     if not request.user.has_perm('transaction.delete_transaction'):
         return http.HttpResponseForbidden('Access Denied')
 
-    context = {'transactions':
-    Transaction.objects.filter(created__day=day,
+    qs = Transaction.objects.filter(created__day=day,
                created__month=month,
-               created__year=year)}
-    return render(request, template_name='today.html', context=context)
+               created__year=year)
+    oneobject = list(qs[:1])
+    tanggal = oneobject[0].created
+    context = {'transactions': qs,
+               'tanggal': tanggal}
+    return render(request, template_name='not_today.html', context=context)
+
+def display_saldodana(request):
+
+    totalbelanja = 0
+    for belanja in Account.objects.filter(account_category__name='BELANJA'):
+        totalbelanja += belanja.jumlah
+
+    totalpendapatan = 0
+    for pendapatan in Account.objects.filter(account_category__name='PENDAPATAN'):
+        totalpendapatan += pendapatan.jumlah
+
+    context = {'belanja': totalbelanja, 'pendapatan': totalpendapatan}
+    return render(request, template_name='saldodana.html', context=context)

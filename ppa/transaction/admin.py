@@ -53,6 +53,13 @@ class TransactionAdmin(ImportExportMixin, admin.ModelAdmin):
         obj.owner = request.user
         obj.save()
 
+    def get_form(self, request, obj=None, **kwargs):
+        self.exclude = []
+        if not request.user.has_perm('transaction.delete_transaction'):
+            self.exclude.append('created')
+            self.exclude.append('modified')
+        return super(TransactionAdmin, self).get_form(request, obj, **kwargs)
+
 
 class AccountAdmin(admin.ModelAdmin):
     list_display = ('name', 'account_category', 'code', 'jumlah_')

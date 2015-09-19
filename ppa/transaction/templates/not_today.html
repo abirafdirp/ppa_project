@@ -17,7 +17,7 @@
       <h2 class="text-center">Laporan Harian Putra Putri Mandiri</h2>
       {% language 'id' %}
         <div class="date">
-          {% now "d F Y" %}
+          {{ tanggal|date:"d F Y" }}
         </div>
       {% endlanguage %}
 
