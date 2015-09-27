@@ -60,7 +60,7 @@
             </tr>
             <tr>
               <td>Total Asset</td>
-              <td class="text-center">{{ totalasset }}</td>
+              <td class="text-center">{{ totalasset|intcomma }}</td>
               <td>Total Hutang dan Modal</td>
               <td class="text-center">{{ pendapatan|add:belanja|add:totalutang|intcomma }}</td>
             </tr>
