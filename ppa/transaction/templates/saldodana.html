@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load l10n %}
 {% load humanize %}
+{% load mathfilters %}
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -25,19 +26,47 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th class="text-center">Pendapatan</th>
-              <th class="text-center">Belanja</th>
+              <td>Pendapatan</td>
+              <td class="text-center">{{ pendapatan }}</td>
             </tr>
-          </thead>
-          <tbody>
-            <tr class="text-center">
-              <td>{{ pendapatan }}</td>
-              <td>{{ belanja }}</td>
+            <tr>
+              <td>Belanja</td>
+              <td class="text-center">{{ belanja|abs }}</td>
+            </tr>
+            <tr>
+              <td>Saldo Dana</td>
+              <td class="text-center">{{ pendapatan|add:belanja }}</td>
             </tr>
           </tbody>
         </table>
       </div>
 
+      <h2 class="text-center">Neraca</h2>
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td>Asset</td>
+              <td class="text-center">{{ totalasset }}</td>
+              <td>Hutang</td>
+              <td class="text-center">{{ totalutang }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>Sisa Dana</td>
+              <td class="text-center">{{ pendapatan|add:belanja }}</td>
+            </tr>
+            <tr>
+              <td>Total Asset</td>
+              <td class="text-center">{{ totalasset }}</td>
+              <td>Total Hutang dan Modal</td>
+              <td class="text-center">{{ pendapatan|add:belanja|add:totalutang }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
     </div>
   </div>

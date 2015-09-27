@@ -38,5 +38,14 @@ def display_saldodana(request):
     for pendapatan in Account.objects.filter(account_category__name='PENDAPATAN'):
         totalpendapatan += pendapatan.jumlah
 
-    context = {'belanja': totalbelanja, 'pendapatan': totalpendapatan}
+    totalasset = 0
+    for pendapatan in Account.objects.filter(account_category__name='ASSET'):
+        totalpendapatan += pendapatan.jumlah
+
+    totalutang = 0
+    for pendapatan in Account.objects.filter(account_category__name='UTANG'):
+        totalpendapatan += pendapatan.jumlah
+
+    context = {'belanja': totalbelanja, 'pendapatan': totalpendapatan,
+               'totalasset': totalasset, 'totalutang': totalutang}
     return render(request, template_name='saldodana.html', context=context)

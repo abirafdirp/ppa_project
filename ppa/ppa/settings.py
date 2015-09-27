@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'transaction',
     'import_export',
+    'mathfilters',
 )
 
 MIDDLEWARE_CLASSES = (
