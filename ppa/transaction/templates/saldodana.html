@@ -27,15 +27,15 @@
           <thead>
             <tr>
               <td>Pendapatan</td>
-              <td class="text-center">{{ pendapatan }}</td>
+              <td class="text-center">{{ pendapatan|intcomma }}</td>
             </tr>
             <tr>
               <td>Belanja</td>
-              <td class="text-center">{{ belanja|abs }}</td>
+              <td class="text-center">{{ belanja|abs|intcomma }}</td>
             </tr>
             <tr>
               <td>Saldo Dana</td>
-              <td class="text-center">{{ pendapatan|add:belanja }}</td>
+              <td class="text-center">{{ pendapatan|add:belanja|intcomma }}</td>
             </tr>
           </tbody>
         </table>
@@ -48,21 +48,21 @@
           <tbody>
             <tr>
               <td>Asset</td>
-              <td class="text-center">{{ totalasset }}</td>
+              <td class="text-center">{{ totalasset|intcomma }}</td>
               <td>Hutang</td>
-              <td class="text-center">{{ totalutang }}</td>
+              <td class="text-center">{{ totalutang|intcomma }}</td>
             </tr>
             <tr>
               <td></td>
               <td></td>
               <td>Sisa Dana</td>
-              <td class="text-center">{{ pendapatan|add:belanja }}</td>
+              <td class="text-center">{{ pendapatan|add:belanja|intcomma }}</td>
             </tr>
             <tr>
               <td>Total Asset</td>
               <td class="text-center">{{ totalasset }}</td>
               <td>Total Hutang dan Modal</td>
-              <td class="text-center">{{ pendapatan|add:belanja|add:totalutang }}</td>
+              <td class="text-center">{{ pendapatan|add:belanja|add:totalutang|intcomma }}</td>
             </tr>
           </tbody>
         </table>

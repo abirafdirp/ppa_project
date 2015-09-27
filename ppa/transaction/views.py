@@ -39,7 +39,7 @@ def display_saldodana(request):
         totalpendapatan += pendapatan.jumlah
 
     totalasset = 0
-    for pendapatan in Account.objects.filter(account_category__name='ASSET'):
+    for pendapatan in Account.objects.filter(account_category__name='ASET'):
         totalpendapatan += pendapatan.jumlah
 
     totalutang = 0
