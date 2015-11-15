@@ -26,10 +26,10 @@ for transaction in all_transaction:
         transaction.account_debet.jumlah -= transaction.jumlah
         transaction.account_debet.save()
 
-    if transaction.account_kredit.account_category.debet == '+':
+    if transaction.account_kredit.account_category.kredit == '+':
         transaction.account_kredit.jumlah += transaction.jumlah
         transaction.account_kredit.save()
 
-    elif transaction.account_kredit.account_category.debet == '-':
+    elif transaction.account_kredit.account_category.kredit == '-':
         transaction.account_kredit.jumlah -= transaction.jumlah
         transaction.account_kredit.save()

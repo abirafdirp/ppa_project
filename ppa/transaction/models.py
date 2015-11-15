@@ -54,6 +54,7 @@ class Transaction(TimeStampedModel):
                               help_text='owner is logged in user and will be'+
                               ' automatically created')
     name = models.CharField(max_length=100, verbose_name='nama')
+    no_kwitansi = models.CharField(max_length=40, null=True, blank=True)
     keterangan = models.CharField(max_length=100, blank=True)
     account_debet = models.ForeignKey(Account, related_name='trasaksi_debet')
     account_kredit = models.ForeignKey(Account,

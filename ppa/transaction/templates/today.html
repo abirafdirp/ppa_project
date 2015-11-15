@@ -25,6 +25,7 @@
         <table class="table table-striped">
           <thead>
             <tr>
+              <th class="text-center">No Kwitansi</th>
               <th class="text-center">Nama</th>
               <th class="text-center">Account Debet</th>
               <th class="text-center">Kode Account Debet</th>
@@ -38,6 +39,7 @@
           <tbody>
             {% for transaction in transactions %}
             <tr class="text-center">
+              <td>{{ transaction.no_kwitansi }}</td>
               <td>{{ transaction.name }}</td>
               <td>{{ transaction.account_debet }}</td>
               <td>{{ transaction.account_debet.code }}</td>

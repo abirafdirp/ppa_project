@@ -31,7 +31,7 @@ class ExportData(resources.ModelResource):
 
 
 class TransactionAdmin(ImportExportMixin, admin.ModelAdmin):
-    list_display = ('created', 'name', 'keterangan', 'kode_debet', 'account_debet',
+    list_display = ('created', 'name', 'no_kwitansi', 'keterangan', 'kode_debet', 'account_debet',
                     'kode_kredit', 'account_kredit', 'jumlah_', 'owner')
 
     search_fields = ('name', 'keterangan', 'jumlah_')
