@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
+from django.db.models import Sum
+
 
 class TimeStampedModel(models.Model):
 
@@ -10,8 +12,8 @@ class TimeStampedModel(models.Model):
     fields.
     """
 
-    created = models.DateField(default=timezone.now())
-    modified = models.DateField(default=timezone.now())
+    created = models.DateField(auto_now_add=True)
+    modified = models.DateField(auto_now_add=True)
 
     class Meta:
         abstract = True
@@ -42,6 +44,39 @@ class Account(TimeStampedModel):
     code = models.CharField(max_length=10, verbose_name='kode', unique=True)
     jumlah = models.IntegerField(default=0)
 
+    def jumlahh(self):
+        debet_tambah = self.transaksi_debet.filter(account_debet__account_category__debet='+').aggregate(Sum('jumlah'))
+        debet_kurang = self.transaksi_debet.filter(account_debet__account_category__debet='-').aggregate(Sum('jumlah'))
+
+        if debet_tambah.values()[0] == None:
+            debet_tambah = 0
+        else:
+            debet_tambah = debet_tambah.values()[0]
+
+        if debet_kurang.values()[0] == None:
+            debet_kurang = 0
+        else:
+            debet_kurang = debet_kurang.values()[0]
+
+        debet = debet_tambah - debet_kurang
+
+        kredit_tambah = self.transaksi_kredit.filter(account_kredit__account_category__kredit='+').aggregate(Sum('jumlah'))
+        kredit_kurang = self.transaksi_kredit.filter(account_kredit__account_category__kredit='-').aggregate(Sum('jumlah'))
+
+        if kredit_tambah.values()[0] == None:
+            kredit_tambah = 0
+        else:
+            kredit_tambah = kredit_tambah.values()[0]
+
+        if kredit_kurang.values()[0] == None:
+            kredit_kurang = 0
+        else:
+            kredit_kurang = kredit_kurang.values()[0]
+
+        kredit = kredit_tambah - kredit_kurang
+        jumlah = debet - kredit
+        return jumlah
+
     class Meta:
         ordering = ['name']
 
@@ -56,7 +91,7 @@ class Transaction(TimeStampedModel):
     name = models.CharField(max_length=100, verbose_name='nama')
     no_kwitansi = models.CharField(max_length=40, null=True, blank=True)
     keterangan = models.CharField(max_length=100, blank=True)
-    account_debet = models.ForeignKey(Account, related_name='trasaksi_debet')
+    account_debet = models.ForeignKey(Account, related_name='transaksi_debet')
     account_kredit = models.ForeignKey(Account,
                                        related_name='transaksi_kredit')
     jumlah = models.IntegerField()

@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.db.models import Sum
 from import_export import resources
 from import_export.admin import ImportExportMixin
 from import_export import fields
@@ -62,13 +63,43 @@ class TransactionAdmin(ImportExportMixin, admin.ModelAdmin):
 
 
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ('name', 'account_category', 'code', 'jumlah_')
+    list_display = ('name', 'account_category', 'code', 'jumlahh', 'jumlah')
     readonly_fields = ('jumlah',)
 
-    def jumlah_(self, obj):
-        jumlah = obj.jumlah
+    def jumlahh(self, obj):
+        debet_tambah = obj.transaksi_debet.filter(account_debet__account_category__debet='+').aggregate(Sum('jumlah'))
+        debet_kurang = obj.transaksi_debet.filter(account_debet__account_category__debet='-').aggregate(Sum('jumlah'))
+
+        if debet_tambah.values()[0] == None:
+            debet_tambah = 0
+        else:
+            debet_tambah = debet_tambah.values()[0]
+
+        if debet_kurang.values()[0] == None:
+            debet_kurang = 0
+        else:
+            debet_kurang = debet_kurang.values()[0]
+
+        debet = debet_tambah - debet_kurang
+
+        kredit_tambah = obj.transaksi_kredit.filter(account_kredit__account_category__kredit='+').aggregate(Sum('jumlah'))
+        kredit_kurang = obj.transaksi_kredit.filter(account_kredit__account_category__kredit='-').aggregate(Sum('jumlah'))
+
+        if kredit_tambah.values()[0] == None:
+            kredit_tambah = 0
+        else:
+            kredit_tambah = kredit_tambah.values()[0]
+
+        if kredit_kurang.values()[0] == None:
+            kredit_kurang = 0
+        else:
+            kredit_kurang = kredit_kurang.values()[0]
+
+        kredit = kredit_tambah - kredit_kurang
+        jumlah = abs(debet + kredit)
         jumlah = "{:,}".format(jumlah)
         return jumlah
+
 
 class AccountCategoryAdmin(admin.ModelAdmin):
     pass
