@@ -8,9 +8,13 @@ import datetime
 
 
 def display_today(request):
-    
-    context = {'transactions':
-    Transaction.objects.filter(date=timezone.localtime(now()).date())}
+    if not request.user.has_perm('transaction.delete_transaction'):
+        transactions = Transaction.objects.filter(date=timezone.localtime(now()).date(), owner=request.user)
+    else:
+        transactions = Transaction.objects.filter(date=timezone.localtime(now()).date())
+    context = {
+        'transactions': transactions
+    }
     return render(request, template_name='today.html', context=context)
 
 

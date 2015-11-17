@@ -2,5 +2,6 @@ diff-match-patch==20121119
 Django==1.8.3
 django-grappelli==2.7.1
 django-import-export==0.2.7
+django-mathfilters==0.3.0
 six==1.9.0
 tablib==0.10.0
