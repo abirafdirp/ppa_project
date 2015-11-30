@@ -32,7 +32,7 @@ class ExportData(resources.ModelResource):
 
 
 class TransactionAdmin(ImportExportMixin, admin.ModelAdmin):
-    list_display = ('created', 'name', 'no_kwitansi', 'keterangan', 'kode_debet', 'account_debet',
+    list_display = ('date', 'name', 'no_kwitansi', 'keterangan', 'kode_debet', 'account_debet',
                     'kode_kredit', 'account_kredit', 'jumlah_', 'owner')
 
     search_fields = ('name', 'keterangan', 'jumlah_')
@@ -59,6 +59,7 @@ class TransactionAdmin(ImportExportMixin, admin.ModelAdmin):
         if not request.user.has_perm('transaction.delete_transaction'):
             self.exclude.append('created')
             self.exclude.append('modified')
+            self.exclude.append('date')
         return super(TransactionAdmin, self).get_form(request, obj, **kwargs)
 
 

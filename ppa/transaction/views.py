@@ -10,7 +10,7 @@ import datetime
 def display_today(request):
     
     context = {'transactions':
-    Transaction.objects.filter(created=timezone.localtime(now()).date())}
+    Transaction.objects.filter(date=timezone.localtime(now()).date())}
     return render(request, template_name='today.html', context=context)
 
 
@@ -27,6 +27,7 @@ def display_not_today(request, day, month, year):
     context = {'transactions': qs,
                'tanggal': tanggal}
     return render(request, template_name='not_today.html', context=context)
+
 
 def display_saldodana(request):
 

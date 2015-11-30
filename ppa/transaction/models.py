@@ -1,7 +1,13 @@
+import datetime
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 from django.db.models import Sum
+
+class AutoDateField(models.DateTimeField):
+    def pre_save(self, model_instance, add):
+        return datetime.datetime.now()
 
 
 class TimeStampedModel(models.Model):
@@ -94,6 +100,7 @@ class Transaction(TimeStampedModel):
     account_debet = models.ForeignKey(Account, related_name='transaksi_debet')
     account_kredit = models.ForeignKey(Account,
                                        related_name='transaksi_kredit')
+    date = models.DateField(blank=True, null=True, default=datetime.date.today())
     jumlah = models.IntegerField()
 
     def save(self, *args, **kwargs):

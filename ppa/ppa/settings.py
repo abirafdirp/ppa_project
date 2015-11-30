@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'transaction',
     'import_export',
     'mathfilters',
-    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
