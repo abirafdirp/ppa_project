@@ -1,4 +1,5 @@
 from django.conf.urls import include, url
+from django.conf.urls.static import static
 from transaction import views
 from django.contrib import admin
 
@@ -9,4 +10,4 @@ urlpatterns = [
     url(r'^(?P<day>[0-9]{2})/(?P<month>[0-9]{1,2})/(?P<year>[0-9]{4})/$',
         views.display_not_today, name='not-today'),
     url(r'^admin/', include(admin.site.urls)),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
